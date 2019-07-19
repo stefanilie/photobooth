@@ -1,10 +1,12 @@
-import os
-from pyomxplayer import OMXPlayer
+import os, sys
 
 def main():
     print("Opening omxplayer inside pygame wrapper...")
     os.system("gphoto2 --capture-movie --stdout> fifo.mjpg &")
-    omx = OMXPlayer('/home/pi/Desktop/Photobooth/fifo.mjpg --live')
+    os.system("omxplayer fifo.mjpg --live")
+
+    print(ceva)
+    
 
 if __name__ == "__main__":
     main()

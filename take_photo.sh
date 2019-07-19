@@ -1,6 +1,6 @@
 generate_name() {
 	FILE=capture.jpg
-	FILE=${FILE%.*}_`date +%d%b%y`.${FILE#*.}
+	FILE=${FILE%.*}_`date +%d%b%y`-`date +%H:%M`.${FILE#*.}
 }
 
 kill_gphoto2(){
@@ -11,7 +11,7 @@ kill_gphoto2(){
 
 take_photo_and_upload(){
 	gphoto2 --capture-image-and-download --filename $FILE
-	gdrive upload $FILE
+	gdrive upload $FILE --share
 	gphoto2 --capture-movie --stdout> fifo.mjpg &
 	omxplayer fifo.mjpg --live
 }

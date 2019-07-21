@@ -12,12 +12,15 @@ kill_gphoto2(){
 take_photo_and_upload(){
 	gphoto2 --capture-image-and-download --filename $FILE
 	gdrive upload $FILE --share
+}
+
+restart_preview(){
 	gphoto2 --capture-movie --stdout> fifo.mjpg &
 	omxplayer fifo.mjpg --live
 }
 
 generate_name
-echo $FILE
+echo "Successfully taken $FILE"
 kill_gphoto2
 take_photo_and_upload
-
+restart_preview

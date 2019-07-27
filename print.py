@@ -7,10 +7,10 @@ from resizeimage import resizeimage
 
 
 def main():
-
-  if len(sys.argv) == 2:
-    file_name = sys.argv[0]
-    gdrive_link = sys.argv[1]
+    
+  if len(sys.argv) == 19:
+    file_name = sys.argv[1]
+    gdrive_link = sys.argv[-1:][0].split('&')[0]
 
     # initializing printer
     printer = Usb(0x416, 0x5011)
@@ -41,9 +41,15 @@ def main():
     new_file_name = file_name + '_rotated_qr.jpg'
     resizedPicture.save(new_file_name)
 
+    qr.print_ascii()
+
     # printing image
+    printer.set(align='center')
+    printer.text("\nNunta Stefan si Catalina\n")
+    printer.text("Scaneaza codul QR\npentru poza color!\n")
     printer.image(new_file_name)
     printer.cut()
-
+  else:
+    print("Invalid argument count.")
 if __name__ == "__main__":
     main()

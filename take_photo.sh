@@ -11,7 +11,10 @@ kill_gphoto2(){
 
 take_photo_and_upload(){
 	gphoto2 --capture-image-and-download --filename $FILE
-	gdrive upload $FILE --share
+	echo "Uploading photo to gdrive..."
+	LINK="$(gdrive upload $FILE --share)"
+	python print.py $FILE $LINK
+	#python test_input.py $LINK
 }
 
 restart_preview(){

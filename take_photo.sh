@@ -1,6 +1,7 @@
 generate_name() {
 	FILE=capture.jpg
 	FILE=${FILE%.*}_`date +%d%b%y`-`date +%H:%M:%S`.${FILE#*.}
+	echo $FILE
 }
 
 kill_gphoto2(){
@@ -10,6 +11,7 @@ kill_gphoto2(){
 }
 
 take_photo_and_upload(){
+	omxplayer countdown.mp4
 	GPHOTO_ERROR=$(gphoto2 --capture-image-and-download --filename $FILE) || python3 send_message.py "Problema cu captarea pozei: $GPHOTO_ERROR"
 	echo "Successfully taken $FILE" 
 	python addFrame.py $FILE
@@ -24,7 +26,7 @@ restart_preview(){
 	omxplayer fifo.mjpg --live
 }
 
-(GENERATE_OUTPUT=$(generate_name) || python3 send_message.py "Problema cu generarea de nume de fisier: $GENERATE_OUTPUT") &&
-(KILL_GPHOTO2=$(kill_gphoto2) || python3 send_message.py "Problema cu inchiderea gphoto2: $KILL_GPHOTO2") &&
-(TAKE_PHOTO=$(take_photo_and_upload) || python3 send_message.py "Problema cu upload: $TAKE_PHOTO") &&
-(RESTART=$(restart_preview) || python3 send_message.py "Problema cu pornirea preview-ului: $RESTART")
+generate_name || python3 send_message.py "Problema cu generarea de nume de fisier"
+KILL_GPHOTO2=$(kill_gphoto2) || python3 send_message.py "Problema cu inchiderea gphoto2: $KILL_GPHOTO2"
+TAKE_PHOTO=$(take_photo_and_upload) || python3 send_message.py "Problema cu upload: $TAKE_PHOTO"
+RESTART=$(restart_preview) || python3 send_message.py "Problema cu pornirea preview-ului: $RESTART"

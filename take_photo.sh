@@ -1,6 +1,6 @@
 generate_name() {
 	FILE=capture.jpg
-	FILE=${FILE%.*}_`date +%d%b%y`-`date +%H:%M`.${FILE#*.}
+	FILE=${FILE%.*}_`date +%d%b%y`-`date +%H:%M:%S`.${FILE#*.}
 }
 
 kill_gphoto2(){

@@ -1,23 +1,14 @@
-import RPi.GPIO as GPIO
-import os
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 
-# Define a callback function that will be called by the GPIO
-# event system:
-def onButton(channel):
-    if channel == 16:
-        os.system("./take_photo.sh")
+def button_callback(channel):
+    print("Button was pushed!")
 
-# Setup GPIO16 as input with internal pull-up resistor to hold it HIGH
-# until it is pulled down to GND by the connected button: 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
-# Register an edge detection event on FALLING edge. When this event
-# fires, the callback onButton() will be executed. Because of
-# bouncetime=20 all edges 20 ms after a first falling edge will be ignored: 
-GPIO.add_event_detect(16, GPIO.FALLING, callback=onButton, bouncetime=20)
+GPIO.add_event_detect(10,GPIO.RISING,callback=button_callback) # Setup event on pin 10 rising edge
 
-# The script would exit now but we want to wait for the event to occure
-# so we block execution by waiting for keyboard input so every key will exit
-# this script
-input()
+message = input("Press enter to quit\n\n") # Run until someone presses enter
+
+GPIO.cleanup() # Clean up

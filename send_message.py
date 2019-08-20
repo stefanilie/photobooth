@@ -2,7 +2,7 @@ import sys
 import json 
 import requests
 
-from config import TOKEN, URL, CHANNEL_ID
+from config import URL, CHANNEL_ID
 
 def get_url(url):
     response = requests.get(url)

@@ -29,4 +29,5 @@ restart_preview(){
 generate_name || python3 send_message.py "Problema cu generarea de nume de fisier"
 KILL_GPHOTO2=$(kill_gphoto2) || python3 send_message.py "Problema cu inchiderea gphoto2: $KILL_GPHOTO2"
 TAKE_PHOTO=$(take_photo_and_upload) || python3 send_message.py "Problema cu upload: $TAKE_PHOTO"
+python monitor_button.py & 
 RESTART=$(restart_preview) || python3 send_message.py "Problema cu pornirea preview-ului: $RESTART"

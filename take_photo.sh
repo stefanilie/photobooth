@@ -10,6 +10,12 @@ kill_gphoto2(){
 	echo "killed $PID"
 }
 
+kill_monitoring(){
+	PID=`ps -eaf | grep monitor_button.py | grep -v grep | awk '{print $2}'`
+	kill -INT $PID
+	echo "killed $PID"
+}
+
 take_photo_and_upload(){
 	omxplayer countdown.mp4
 	GPHOTO_ERROR=$(gphoto2 --capture-image-and-download --filename $FILE) || python3 send_message.py '`Problema cu captarea pozei:` $GPHOTO_ERROR'
@@ -26,9 +32,9 @@ restart_preview(){
 	omxplayer fifo.mjpg --live
 }
 
-generate_name || python3 send_message.py "Problema cu generarea de nume de fisier"
-KILL_GPHOTO2=$(kill_gphoto2) || python3 send_message.py '`Problema cu inchiderea gphoto2:` $KILL_GPHOTO2'
-TAKE_PHOTO=$(take_photo_and_upload) || python3 send_message.py '`Problema cu upload:` $TAKE_PHOTO'
-python photobooth_status.py
+kill_monitoring
+generate_name
+kill_gphoto2
+TAKE_PHOTO=$(take_photo_and_upload) || python3 send_message.py "Problema cu captarea pozei: $TAKE_PHOTO"
 python monitor_button.py & 
-RESTART=$(restart_preview) || python3 send_message.py '`Problema cu pornirea preview-ului:` $RESTART'
+RESTART=$(restart_preview) || python3 send_message.py "Problema cu pornirea preview-ului: $RESTART"

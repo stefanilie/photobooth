@@ -11,18 +11,19 @@ kill_gphoto2(){
 }
 
 kill_monitoring(){
-	PID=`ps -eaf | grep monitor_button.py | grep -v grep | awk '{print $2}'`
-	kill -INT $PID
-	echo "killed $PID"
+#	PID=`ps -eaf | grep monitor_button.py | grep -v grep | awk '{print $2}'`
+	for pid in $(ps -ef | grep "monitor_button.py" | awk '{print $2}'); do kill -9 $pid; done
+	#kill -INT $PID
+	#echo "killed $PID"
 }
 
 take_photo_and_upload(){
 	omxplayer countdown.mp4
-	GPHOTO_ERROR=$(gphoto2 --capture-image-and-download --filename $FILE) || python3 send_message.py '`Problema cu captarea pozei:` $GPHOTO_ERROR'
+	GPHOTO_ERROR=$(gphoto2 --capture-image-and-download --filename $FILE) || python3 send_message.py "Problema cu captarea pozei: $GPHOTO_ERROR"
 	echo "Successfully taken $FILE" 
 	python addFrame.py $FILE
 	echo "Uploading photo to gdrive..."
-	LINK="$(gdrive upload $FILE --share)" || python3 send_message.py '`Problema cu uploadul pozei:` $LINK'
+	LINK="$(gdrive upload $FILE --share)" || python3 send_message.py "Problema cu uploadul pozei: $LINK"
 	python print.py $FILE $LINK || python3 send_message.py '`Problema cu printarea`'
 	#python test_input.py $LINK
 }

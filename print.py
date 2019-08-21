@@ -14,7 +14,7 @@ def get_url(url):
     return content
 
 def send_message(text):
-    url = URL + "sendMessage?text={}&chat_id={}".format(text, CHANNEL_ID)
+    url = URL + "sendMessage?text={}&chat_id={}&parse_mode={}".format(text, CHANNEL_ID, 'markdown')
     get_url(url)
 
 
@@ -62,7 +62,7 @@ def main():
       printer.text("Scaneaza codul QR\npentru poza color!\n")
       printer.image(new_file_name)
       printer.cut()
-    except Exception as e: send_message("Eroare la printare: %s" %(e))
+    except Exception as e: send_message("`Eroare la printare:` %s" %(e))
   else:
     print("Invalid argument count.")
 if __name__ == "__main__":

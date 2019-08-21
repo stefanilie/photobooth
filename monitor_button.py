@@ -21,9 +21,9 @@ class Monitor:
     def button_callback(self, channel):
         if not self.called_once:
             self.called_once=True
-            #GPIO.cleanup() # Clean up
+            GPIO.cleanup() # Clean up
             print("button pressed once")
-            #os.system("./take_photo.sh")
+            os.system("./take_photo.sh")
 
 #message = input("Press enter to quit\n\n") # Run until someone presses enter
 

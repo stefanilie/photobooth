@@ -9,8 +9,8 @@ def get_url(url):
     content = response.content.decode("utf8")
     return content
 
-def send_message(text, chat_id):
-    url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
+def send_message(text):
+    url = URL + "sendMessage?text={}&chat_id={}&parse_mode={}".format(text, CHANNEL_ID, "markdown")
     get_url(url)
 
-send_message(sys.argv[1], CHANNEL_ID)
+send_message(sys.argv[1])

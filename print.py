@@ -62,7 +62,19 @@ def main():
       printer.text("Scaneaza codul QR\npentru poza color!\n")
       printer.image(new_file_name)
       printer.cut()
-    except Exception as e: send_message("`Eroare la printare:` %s" %(e))
+    except Exception as e: 
+      gdrive_link = sys.argv[-1:][0].split('&')[0]
+      send_message("`Eroare la printare:` %s" %(e))
+      qr = qrcode.QRCode(
+          version=1,
+          error_correction=qrcode.constants.ERROR_CORRECT_L,
+          box_size=7,
+          border=1,
+      )
+      qr.add_data(gdrive_link)
+      img = qr.make_image()
+      img.save("error_qr.png")
+
   else:
     print("Invalid argument count.")
 if __name__ == "__main__":

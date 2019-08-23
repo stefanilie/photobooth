@@ -25,10 +25,9 @@ f=open('photos.txt', 'w')
 new=int(data)+1
 f.write(str(new))
 f.close()
-if data == 175 or data == 105:
+if int(data) == 175 or int(data) == 105:
   send_message("`Poze facute:` "+str(data))
   send_message("SCHIMBA ROLA!")
-if data % 25 == 0:
+if int(data) % 25 == 0:
   send_message("`Poze facute:` "+str(data))
-if data > 25:
   os.system('rm -rf *.jpg')

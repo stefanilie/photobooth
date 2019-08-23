@@ -15,18 +15,13 @@ def send_message(text):
     get_url(url)
 
 path, dirs, files = next(os.walk(os.getcwd()))
-with open('photos.txt','r+') as f:
+with open('photos.txt','w') as f:
     pdb.set_trace()
-    #convert to string:
     data = f.read()
     file_count = len(files)-25
-    if data == '0':
-      f.seek(0)
-      f.write(str(file_count))
-    else:
-      f.seek(0)
-      new=int(data)+1
-      f.write(new)
+    #f.seek(0)
+    new=int(data)+1
+    f.write(str(new))
     f.close()
     if file_count == 175 or file_count == 105:
       send_message("`Poze facute:` "+str(file_count))

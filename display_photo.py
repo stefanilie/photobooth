@@ -8,7 +8,7 @@ def main():
     screen = pygame.display.Info()
     gameDisplay = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-    counter, text = 15, '15'.rjust(3)
+    counter, text = 10, '10'.rjust(3)
     message = 'Se printeaza poza...'
     clock = pygame.time.Clock()
     pygame.time.set_timer(pygame.USEREVENT, 1000)

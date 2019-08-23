@@ -4,8 +4,8 @@ import pygame
 pygame.init()
 
 infoObject = pygame.display.Info()
-pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
-
+gameDisplay = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
+#gameDisplay = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption('Imprimanta s-a stricat :( ')
 
 black = (0,0,0)
@@ -17,8 +17,8 @@ carImg = pygame.image.load('error_qr.png')
 def car(x,y):
     gameDisplay.blit(carImg, (x,y))
 
-x =  (display_width *0.5)
-y = (display_height *0.5)
+x =  (infoObject.current_w *0.4)
+y = (infoObject.current_h *0.4)
 
 while not crashed:
     for event in pygame.event.get():

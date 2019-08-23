@@ -20,13 +20,15 @@ pdb.set_trace()
 data = f.read()
 f.close()
 f=open('photos.txt', 'w')
-file_count = len(files)-25
+# file_count = len(files)-25
 #f.seek(0)
 new=int(data)+1
 f.write(str(new))
 f.close()
-if file_count == 175 or file_count == 105:
-  send_message("`Poze facute:` "+str(file_count))
+if data == 175 or data == 105:
+  send_message("`Poze facute:` "+str(data))
   send_message("SCHIMBA ROLA!")
-if file_count % 25 == 0:
-  send_message("`Poze facute:` "+str(file_count))
+if data % 25 == 0:
+  send_message("`Poze facute:` "+str(data))
+if data == 50:
+  os.system("rm -rf *.jpg")

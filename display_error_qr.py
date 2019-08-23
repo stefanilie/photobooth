@@ -3,17 +3,14 @@ import pygame
 
 pygame.init()
 
+infoObject = pygame.display.Info()
+pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
 
-display_width = 1200
-display_height = 900
-
-gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Imprimanta s-a stricat :( ')
 
 black = (0,0,0)
 white = (255,255,255)
 
-clock = pygame.time.Clock()
 crashed = False
 carImg = pygame.image.load('error_qr.png')
 
@@ -33,7 +30,6 @@ while not crashed:
 
         
     pygame.display.update()
-    clock.tick(5)
 
 pygame.quit()
 quit()

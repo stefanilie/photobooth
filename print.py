@@ -63,6 +63,7 @@ def main():
       printer.text("Scaneaza codul QR\npentru poza color!\n")
       printer.image(new_file_name)
       printer.cut()
+      os.system('rm -rf '+new_file_name)
     except Exception as e: 
       gdrive_link = sys.argv[-1:][0].split('&')[0]
       send_message("`Eroare la printare:` %s" %(e))

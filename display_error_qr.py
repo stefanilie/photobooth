@@ -4,7 +4,6 @@ import pygame
 pygame.init()
 
 screen = pygame.display.Info()
-#gameDisplay = pygame.display.set_mode((screen.current_w, screen.current_h))
 gameDisplay = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption('Imprimanta s-a stricat :( ')
 

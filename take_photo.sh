@@ -25,7 +25,8 @@ take_photo_and_upload(){
 	echo "Uploading photo to gdrive..."
 	python display_photo.py $FILE &
 	LINK="$(gdrive upload $FILE --share)" || python3 send_message.py "Problema cu uploadul pozei: $LINK"
-	python print.py $FILE $LINK || python3 send_message.py '`Problema cu printarea`'
+	python print.py $FILE $LINK || python3 send_message.py '`Problema cu printarea`' 
+	python photobooth_status.py
 }
 
 restart_preview(){

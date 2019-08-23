@@ -2,7 +2,7 @@ import os
 import sys
 import json 
 import requests
-
+import pdb
 from config import URL, CHANNEL_ID
 
 def get_url(url):
@@ -14,10 +14,22 @@ def send_message(text):
     url = URL + "sendMessage?text={}&chat_id={}&parse_mode={}".format(text, CHANNEL_ID, "markdown")
     get_url(url)
 
-
 path, dirs, files = next(os.walk(os.getcwd()))
-file_count = len(files)-25
-#if file_count == 175 or file_count == 105:
-#    send_message("`Poze facute:` "+str(file_count))
-#    send_message("SCHIMBA ROLA!")
-send_message("`Poze facute:` "+str(file_count))
+with open('photos.txt','r+') as f:
+    pdb.set_trace()
+    #convert to string:
+    data = f.read()
+    file_count = len(files)-25
+    if data == '0':
+      f.seek(0)
+      f.write(str(file_count))
+    else:
+      f.seek(0)
+      new=int(data)+1
+      f.write(new)
+    f.close()
+    if file_count == 175 or file_count == 105:
+      send_message("`Poze facute:` "+str(file_count))
+      send_message("SCHIMBA ROLA!")
+    if file_count % 25 == 0:
+      send_message("`Poze facute:` "+str(file_count))

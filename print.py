@@ -1,3 +1,4 @@
+import os
 import sys
 import json 
 import qrcode
@@ -74,7 +75,7 @@ def main():
       qr.add_data(gdrive_link)
       img = qr.make_image()
       img.save("error_qr.png")
-
+      os.system('python display_error_qr.py')
   else:
     print("Invalid argument count.")
 if __name__ == "__main__":

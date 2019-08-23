@@ -59,7 +59,7 @@ def main():
 
       # printing image
       printer.set(align='center')
-      printer.text("\nNunta Stefan si Catalina\n")
+      printer.text("\nNunta Catalina si Stefan\n")
       printer.text("Scaneaza codul QR\npentru poza color!\n")
       printer.image(new_file_name)
       printer.cut()

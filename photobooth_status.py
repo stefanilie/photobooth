@@ -2,7 +2,7 @@ import os
 import sys
 import json 
 import requests
-import pdb
+
 from config import URL, CHANNEL_ID
 
 def get_url(url):
@@ -16,7 +16,7 @@ def send_message(text):
 
 path, dirs, files = next(os.walk(os.getcwd())) 
 f=open('photos.txt', 'r')
-pdb.set_trace()
+
 data = f.read()
 f.close()
 f=open('photos.txt', 'w')
@@ -30,5 +30,5 @@ if data == 175 or data == 105:
   send_message("SCHIMBA ROLA!")
 if data % 25 == 0:
   send_message("`Poze facute:` "+str(data))
-if data == 50:
-  os.system("rm -rf *.jpg")
+if data > 25:
+  os.system('rm -rf *.jpg')

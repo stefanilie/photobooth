@@ -7,28 +7,28 @@ def main():
 
     screen = pygame.display.Info()
     gameDisplay = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    pygame.display.set_caption('Imprimanta s-a stricat :( ')
 
-    counter, text = 15, '20'.rjust(3)
+    counter, text = 15, '15'.rjust(3)
     message = 'Se printeaza poza...'
     clock = pygame.time.Clock()
     pygame.time.set_timer(pygame.USEREVENT, 1000)
     font = pygame.font.SysFont('Consolas', 30)
-    font_message = pygame.font.SysFont('Consolas', 50)
+    font_message = pygame.font.SysFont('Consolas', 70)
     black = (0,0,0)
 
     crashed = False
     picture = pygame.image.load(sys.argv[1])
-
+    picture = pygame.transform.scale(picture, (998, 665))
+    
     def car(x,y):
         gameDisplay.blit(picture, (x,y))
         gameDisplay.blit(font.render(text, True, (255, 255, 255)), (32, 48))
-        gameDisplay.blit(font_message.render(message, True, (255, 255, 255)), (400, 200)) 
+        gameDisplay.blit(font_message.render(message, True, (255, 255, 255)), (420, 200)) 
 
 
 
-    x =  (screen.current_w *0.4)
-    y = (screen.current_h *0.4)
+    x =  (screen.current_w *0.13)
+    y = (screen.current_h *0.3)
 
     while not crashed:
         for event in pygame.event.get():
